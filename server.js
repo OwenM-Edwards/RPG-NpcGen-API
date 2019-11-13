@@ -1,5 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const knex = require('knex')
+
+const database = knex({
+   client:'pg',
+   connection: {
+      host: '127.0.0.1',
+      user:'postgres',
+      password:'2454',
+      database:'rpgnpcgen'
+   }
+})
 
 
 const app =  express();
@@ -22,6 +34,7 @@ const raceDatabase ={
 }
 
 // TEMP DATABASES
+
 
 
 constructChar=(race, res)=>{
@@ -47,12 +60,32 @@ pickRandomProperty = (obj) => {
    return result;
 }
 
+
+generateRanID = (idMax) => {
+   return Math.random() * idMax;    
+}
 app.get('/', (req, res)=> {
    res.send('this is working');
-})
+}) 
 
 app.get('/genchar', (req, res)=>{
-   res.send(constructChar(req.body.race, res));
+   // res.send(constructChar(req.body.race, res));
+   // database.select('*').from('nameshuman').then(data => {
+   //    res.json(data);
+   // });
+   let gender = req.body.gender;
+   let race = req.body.race;
+   let id = Math.floor(generateRanID(10));
+   if(id > 10){
+      id = 10;
+   } else if(id < 1){
+      id = 1;
+   }
+   database(race).where({
+      id: id,
+   }).select(gender).then(data=>{
+      res.json(data);
+   })
 
 })
 
