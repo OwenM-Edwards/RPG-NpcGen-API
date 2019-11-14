@@ -2,6 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex')
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+   cloud_name: 'zibbly', 
+   api_key: '766114696781663', 
+   api_secret: 'cMGDYZfr1hZS-hFXsOCKpO8YHUA' 
+});
 
 
 const database = knex({
@@ -14,65 +21,55 @@ const database = knex({
    }
 })
  
-
-
-
 const app =  express();
 app.use(bodyParser.json());
 app.use(cors())
 
-// TEMP DATABASES
-const raceDatabase ={
-   human:[
-      'sally',
-      'pete',
-      'wally',
-      'nigel'
-   ],
-   orc:[
-      'Gurth',
-      'Galron',
-      'Poolie',
-      'Hargarod'
-   ]
-}
-
-// TEMP DATABASES
-
-
-
-constructChar=(race, res)=>{
-   let keys = Object.keys(raceDatabase);
-   keys.forEach(function(key){
-      if(race === key){
-         let target = raceDatabase[key]
-         let item = raceDatabase[key][Math.floor(Math.random()*raceDatabase[key].length)];
-         return res.status(200).json(item);
-      }
-   })
-  
-   // let charName = raceDatabase.race[Math.floor(Math.random() * raceDatabase.human.length)];
-   // return charName;
-}
 
 app.get('/', (req, res)=> {
-   res.send('this is working');
+   console.log('hey');
 }) 
 
-app.post('/genchar', (req, res)=>{
-   // res.send(constructChar(req.body.race, res));
-   // database.select('*').from('nameshuman').then(data => {
-   //    res.json(data);
-   // });
+
+
+//POSTING IMAGES
+app.post('/charimage', function(req, res){
+   cloudinary.uploader.upload(`${__dirname}/images/female/FDWBA00_lg.png`,
+      function(error, result) {
+         saveToDatabase(req, result.url)
+      }
+   );
+   // const file = `${__dirname}/images/` + gender + `/FDWBA00_lg.png`;
+   // res.download(file); // Set disposition and send it.
+});
+saveToDatabase = (req,url) => {
    let gender = req.body.gender;
    let race = req.body.race;
-   database(race).select(gender).orderByRaw('RANDOM() LIMIT 1')
-   
-   
-   .then(data=>{
-      res.json(data);
-   })
+   if(gender === 'female'){
+         database.insert({'female': url}).into(race)
+         .then(data=>{
+      })
+   } else{
+      database.insert({'url': url}).into(race+gender)
+         .then(data=>{
+      })
+   }
+}
+//POSTING IMAGES
 
+
+
+
+app.post('/genchar', (req, res)=>{
+   let gender = req.body.gender;
+   let race = req.body.race;
+   let role = req.body.role;
+   let file = `${__dirname}/images/female/FDWBA00_lg.png`;
+   database(race).select(gender).orderByRaw('RANDOM() LIMIT 1')
+   .then(data=>{
+      res.json(data)
+   })
+   .catch(err=>res.status(400).json('Error'))
 })
 
 
