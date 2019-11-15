@@ -37,8 +37,15 @@ app.post('/charimage', function(req, res){
    cloudinary.uploader.upload(`${__dirname}/images/female/FDWBA00_lg.png`,
       function(error, result) {
          saveToDatabase(req, result.url)
-      }
-   );
+         
+      } 
+   )
+   .then(
+      res.status(200).json('Image added to database')
+   )
+   .catch(
+      res.status(400).json('Error adding image')
+   )
    // const file = `${__dirname}/images/` + gender + `/FDWBA00_lg.png`;
    // res.download(file); // Set disposition and send it.
 });
@@ -64,12 +71,29 @@ app.post('/genchar', (req, res)=>{
    let gender = req.body.gender;
    let race = req.body.race;
    let role = req.body.role;
-   let file = `${__dirname}/images/female/FDWBA00_lg.png`;
-   database(race).select(gender).orderByRaw('RANDOM() LIMIT 1')
+
+   //SELECT THE NAME
+   database('names'+race+gender)
+      .select('name').orderByRaw('RANDOM() LIMIT 1')
+
    .then(data=>{
-      res.json(data)
+      //SAVE NAME TEMP
+      let returnName = data
+
+      //SELECT THE IMAGE
+      database('img'+race+gender)
+         .select('url').orderByRaw('RANDOM() LIMIT 1')
+
+      .then(returnImage=>{
+         let completeReturn = []
+         completeReturn[0] = returnImage
+         completeReturn[1] = returnName
+         res.json(completeReturn)
+      })
+      .catch(err=>
+         res.status(400).json('error')
+      ) 
    })
-   .catch(err=>res.status(400).json('Error'))
 })
 
 
