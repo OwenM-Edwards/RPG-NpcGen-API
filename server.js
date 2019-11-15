@@ -36,7 +36,7 @@ app.get('/', (req, res)=> {
 app.post('/charimage', function(req, res){
    cloudinary.uploader.upload(`${__dirname}/images/female/FDWBA00_lg.png`,
       function(error, result) {
-         saveToDatabase(req, result.url)
+         saveImageToDatabase(req, result.url)
          
       } 
    )
@@ -49,7 +49,7 @@ app.post('/charimage', function(req, res){
    // const file = `${__dirname}/images/` + gender + `/FDWBA00_lg.png`;
    // res.download(file); // Set disposition and send it.
 });
-saveToDatabase = (req,url) => {
+saveImageToDatabase = (req,url) => {
    let gender = req.body.gender;
    let race = req.body.race;
    if(gender === 'female'){
@@ -62,18 +62,31 @@ saveToDatabase = (req,url) => {
       })
    }
 }
-//POSTING IMAGES
+
+
+
+//ADDING NEW NAME
+app.post('/addname', (req, res)=>{
+   let gender = req.body.gender;
+   let race = req.body.race;
+   let name = req.body.name;
+   database('names' + race + gender)
+      .insert({'name': name})
+   .then(data=>res.status(200).json('Success'))
+   .catch(error => res.status(400).json('duplicate'))
+})
 
 
 
 
+//GEN CHAR
 app.post('/genchar', (req, res)=>{
    let gender = req.body.gender;
    let race = req.body.race;
    let role = req.body.role;
 
    //SELECT THE NAME
-   database('names'+race+gender)
+   database('names' + race + gender)
       .select('name').orderByRaw('RANDOM() LIMIT 1')
 
    .then(data=>{
