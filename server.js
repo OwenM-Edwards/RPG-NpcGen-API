@@ -25,41 +25,29 @@ const app =  express();
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
 
-
-
-app.get('/', (req, res)=> {
-   console.log('hey');
-}) 
-
-
+// app.get('/', (req, res)=> {
+//    console.log('hey');
+// }) 
 
 //POSTING IMAGES
 app.post('/charimage', function(req, res){
-   console.log(req.body.image[0].src.base64)
-
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
-      function(error, result) {console.log(result, error) })
-         .then(
-            res.status(200).json('Image added to database')
-         )
-         .catch( 
-            res.status(400).json('Error adding image')
-         )
+      function(error, result) {
+         saveImageToDatabase(req, result.url)
+      })
+      .then(
+      )
+      .catch( 
+         res.status(400).json('Error adding image')
+      )
 });
 saveImageToDatabase = (req,url) => {
    let gender = req.body.gender;
    let race = req.body.race;
-   if(gender === 'female'){
-         database.insert({'female': url}).into(race)
-         .then(data=>{
-      })
-   } else{
-      database.insert({'url': url}).into(race+gender)
-         .then(data=>{
-      })
-   }
+   database('img'+race+gender).insert({'url':url})
+   .then(data=>{
+   })
 }
-
 
 
 //ADDING NEW NAME
@@ -67,7 +55,7 @@ app.post('/addname', (req, res)=>{
    let gender = req.body.gender;
    let race = req.body.race;
    let name = req.body.name;
-   database('names' + race + gender)
+   database('names'+race+gender)
       .insert({'name': name})
    .then(data=>res.status(200).json('Success'))
    .catch(error => res.status(400).json('duplicate'))
@@ -83,7 +71,7 @@ app.post('/genchar', (req, res)=>{
    let role = req.body.role;
 
    //SELECT THE NAME
-   database('names' + race + gender)
+   database('names'+race+gender)
       .select('name').orderByRaw('RANDOM() LIMIT 1')
 
    .then(data=>{
