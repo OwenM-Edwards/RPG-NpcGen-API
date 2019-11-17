@@ -22,8 +22,9 @@ const database = knex({
 })
  
 const app =  express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
+
 
 
 app.get('/', (req, res)=> {
@@ -34,20 +35,16 @@ app.get('/', (req, res)=> {
 
 //POSTING IMAGES
 app.post('/charimage', function(req, res){
-   cloudinary.uploader.upload(`${__dirname}/images/female/FDWBA00_lg.png`,
-      function(error, result) {
-         saveImageToDatabase(req, result.url)
-         
-      } 
-   )
-   .then(
-      res.status(200).json('Image added to database')
-   )
-   .catch(
-      res.status(400).json('Error adding image')
-   )
-   // const file = `${__dirname}/images/` + gender + `/FDWBA00_lg.png`;
-   // res.download(file); // Set disposition and send it.
+   console.log(req.body.image[0].src.base64)
+
+   cloudinary.uploader.upload(req.body.image[0].src.base64, 
+      function(error, result) {console.log(result, error) })
+         .then(
+            res.status(200).json('Image added to database')
+         )
+         .catch( 
+            res.status(400).json('Error adding image')
+         )
 });
 saveImageToDatabase = (req,url) => {
    let gender = req.body.gender;
