@@ -4,14 +4,16 @@ const cors = require('cors');
 const knex = require('knex')
 const cloudinary = require('cloudinary').v2;
 
+const charimage = require('./controllers/imageUpload');
+const addname = require('./controllers/addname');
+const genchar = require('./controllers/genchar');
+
 cloudinary.config({ 
    cloud_name: 'zibbly', 
    api_key: '766114696781663', 
    api_secret: 'cMGDYZfr1hZS-hFXsOCKpO8YHUA' 
 });
-
-
-const database = knex({
+const db = knex({
    client:'pg',
    connection: {
       host: '127.0.0.1',
@@ -20,79 +22,17 @@ const database = knex({
       database:'rpgnpcgen'
    }
 })
- 
 const app =  express();
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
 
-// app.get('/', (req, res)=> {
-//    console.log('hey');
-// }) 
 
-//POSTING IMAGES
-app.post('/charimage', function(req, res){
-   cloudinary.uploader.upload(req.body.image[0].src.base64, 
-      function(error, result) {
-         saveImageToDatabase(req, result.url)
-      })
-      .then(
-      )
-      .catch( 
-         res.status(400).json('Error adding image')
-      )
-});
-saveImageToDatabase = (req,url) => {
-   let gender = req.body.gender;
-   let race = req.body.race;
-   database('img'+race+gender).insert({'url':url})
-   .then(data=>{
-   })
-}
-
-
+//POSTING NEW IMAGE
+app.post('/charimage', (req, res)=>{ charimage.handleCharImage(req, res, db, cloudinary)});
 //ADDING NEW NAME
-app.post('/addname', (req, res)=>{
-   let gender = req.body.gender;
-   let race = req.body.race;
-   let name = req.body.name;
-   database('names'+race+gender)
-      .insert({'name': name})
-   .then(data=>res.status(200).json('Success'))
-   .catch(error => res.status(400).json('duplicate'))
-})
-
-
-
-
-//GEN CHAR
-app.post('/genchar', (req, res)=>{
-   let gender = req.body.gender;
-   let race = req.body.race;
-   let role = req.body.role;
-
-   //SELECT THE NAME
-   database('names'+race+gender)
-      .select('name').orderByRaw('RANDOM() LIMIT 1')
-
-   .then(data=>{
-      //SAVE NAME TEMP
-      let returnName = data
-
-      //SELECT THE IMAGE
-      database('img'+race+gender)
-         .select('url').orderByRaw('RANDOM() LIMIT 1')
-
-      .then(returnImage=>{
-         let completeReturn = []
-         completeReturn[0] = returnImage
-         completeReturn[1] = returnName
-         res.json(completeReturn)
-      })
-      .catch(err=>
-         res.status(400).json('error')
-      ) 
-   })
-})
+app.post('/addname', (req, res)=>{ addname.handleAddName(req,res,db)});
+//GENERATE THE CHARACTER
+app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 
 app.listen(3000, ()=> {
