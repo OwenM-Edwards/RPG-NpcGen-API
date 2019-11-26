@@ -7,6 +7,8 @@ const cloudinary = require('cloudinary').v2;
 const charimage = require('./controllers/imageUpload');
 const addname = require('./controllers/addname');
 const genchar = require('./controllers/genchar');
+const addroleplay = require('./controllers/addRoleplay');
+const addintrigue = require('./controllers/addIntrigue');
 
 cloudinary.config({ 
    cloud_name: 'zibbly', 
@@ -25,8 +27,11 @@ const db = knex({
 const app =  express();
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
-
-
+ 
+//ADDIING NEW ROLEPLAY PROMPT
+app.post('/addroleplay', (req, res)=>{ addroleplay.handleAddRoleplay(req, res, db)});
+//ADDIING NEW INTRIGUE
+app.post('/addintrigue', (req, res)=>{ addintrigue.handleAddIntrigue(req, res, db)});
 //POSTING NEW IMAGE
 app.post('/charimage', (req, res)=>{ charimage.handleCharImage(req, res, db, cloudinary)});
 //ADDING NEW NAME
