@@ -71,7 +71,7 @@ const handleGenChar = (req, res, db,) => {
                                     finalReturn[5] = returnedRoleplay
                                     finalReturn[6] = role
                                     finalReturn[7] = race
-                                    finalReturn[8] = gender
+                                    finalReturn[8] = gender   
 
                                     res.json(finalReturn)
                                  })
