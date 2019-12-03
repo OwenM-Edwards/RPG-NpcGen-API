@@ -30,7 +30,7 @@ const handleGenChar = (req, res, db,) => {
       let returnName = returnedName
       let returnRole = role
 
-      //GEN THE IMAGE
+      //GEN THE IMAGE 
       db('img'+race+gender)
          .select('url')
          .orderByRaw('RANDOM() LIMIT 1')
