@@ -1,6 +1,6 @@
 const handleAddRoleplay  = (req, res, db,) => {
    let roleplay = req.body.roleplay;
-   db('descroleplay')
+   db('mod_descroleplay')
       .insert({'roleplay': roleplay})
       .then(data=>{
          res.status(200).json('Success')

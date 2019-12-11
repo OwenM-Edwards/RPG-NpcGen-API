@@ -1,6 +1,6 @@
 const handleAddIntrigue  = (req, res, db,) => {
    let intrigue = req.body.intrigue;
-   db('descintrigue')
+   db('mod_descintrigue')
       .insert({'intrigue': intrigue})
       .then(data=>{
          res.status(200).json('Success')
