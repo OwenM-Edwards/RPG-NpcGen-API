@@ -7,7 +7,6 @@ const handleAddName  = (req, res, db,) => {
    let race = req.body.race;
    let name = req.body.name;
    let lastname = req.body.lastname
-   console.log('active')
    if(req.body.name){
       db('mod_names'+race)
          .insert({'name': name, "gender":charGender})

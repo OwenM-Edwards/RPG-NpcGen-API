@@ -1,5 +1,5 @@
 const handleGenChar = (req, res, db,) => {
-   let randomGenderArr = ['male','female'];
+   let randomGenderArr = [true,false];
    let randomRaceArr = ['human','orc'];
    let randomRoleArr = ['merchant','wizard'];
    if(req.body.gender === 'random'){
@@ -23,16 +23,19 @@ const handleGenChar = (req, res, db,) => {
 
    //GEN THE CHARACTER CHAIN
    //GEN THE NAME
-   db('names'+race+gender)
-      .select('name').orderByRaw('RANDOM() LIMIT 1')
+   db('names'+race)
+      .select('name')
+      .where({gender:gender})
+      .orderByRaw('RANDOM() LIMIT 1')
    //SAVE NAME TEMP
    .then(returnedName=>{
       let returnName = returnedName
       let returnRole = role
 
       //GEN THE IMAGE 
-      db('img'+race+gender)
+      db('img'+race)
          .select('url')
+         .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
       //SAVETHEIMAGETEMP
       .then(returnedImage=>{

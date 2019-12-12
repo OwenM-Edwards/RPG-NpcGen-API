@@ -13,10 +13,14 @@ const handleCharImage = (req, res, db, cloudinary) => {
       )
 };
 saveImageToDatabase = (req,url, id,db) => {
-   let gender = req.body.gender;
+   if(req.body.gender == 'male'){
+      var charGender = true
+   } else if(req.body.gender == 'female'){
+      var charGender = false
+   }
    let race = req.body.race;
    let role = req.body.role;
-   db('img'+race+gender).insert({'url':url, 'role':role, 'key':id})
+   db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
    .then(data=>{
    })
 }
