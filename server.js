@@ -9,6 +9,7 @@ const addname = require('./controllers/addname');
 const genchar = require('./controllers/genchar');
 const addroleplay = require('./controllers/addRoleplay');
 const addintrigue = require('./controllers/addIntrigue');
+const app =  express();
 
 cloudinary.config({ 
    cloud_name: 'zibbly', 
@@ -18,13 +19,11 @@ cloudinary.config({
 const db = knex({
    client:'pg',
    connection: {
-      host: '127.0.0.1',
-      user:'postgres',
-      password:'2454',
-      database:'rpgnpcgen'
+      connectionString:process.env.DATABASE_URL,
+      ssl : true,
    }
 })
-const app =  express();
+
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
 app.get('/', (req, res)=>{ res.send('it is working') })
@@ -41,5 +40,5 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 
 app.listen(process.env.PORT || 3000, ()=> {
-   console.log('App running on port ${process.env.PORT}')
-})
+   console.log("App running on port ${process.env.PORT}")
+});
