@@ -40,6 +40,6 @@ app.post('/addname', (req, res)=>{ addname.handleAddName(req,res,db)});
 app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 
-app.listen(3000, ()=> {
-   console.log("App running port 3000")
+app.listen(process.env.PORT || 3000, ()=> {
+   console.log('App running on port ${process.env.PORT}')
 })
