@@ -27,7 +27,7 @@ const db = knex({
 const app =  express();
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
- 
+app.get('/', (req, res)=>{ res.send('it is working') })
 //ADDIING NEW ROLEPLAY PROMPT
 app.post('/addroleplay', (req, res)=>{ addroleplay.handleAddRoleplay(req, res, db)});
 //ADDIING NEW INTRIGUE
