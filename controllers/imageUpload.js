@@ -1,13 +1,11 @@
 //POSTING IMAGES
 const handleCharImage = (req, res, db, cloudinary) => {
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
-      
-      // notification_url: "https://mysite.example.com/mod_endpoint"  },
-      function(error, result) {
-         saveImageToDatabase(req, result.url, result.public_id, db)
-      },
-         { moderation: 'manual' }
-      )
+      { moderation: 'manual' },
+      { notification_url: "https://safe-dawn-37731.herokuapp.com/genchar/cloudnotification"  }
+      // function(error, result) {
+      //    saveImageToDatabase(req, result.url, result.public_id, db)
+      // })
       .then(data=>{
          res.status(200).json(data)
       })

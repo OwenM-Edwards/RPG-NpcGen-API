@@ -9,6 +9,7 @@ const addname = require('./controllers/addname');
 const genchar = require('./controllers/genchar');
 const addroleplay = require('./controllers/addRoleplay');
 const addintrigue = require('./controllers/addIntrigue');
+const cloudnotification = require('./controllers/cloudnotification');
 const app =  express();
 
 cloudinary.config({ 
@@ -38,6 +39,8 @@ app.post('/addname', (req, res)=>{ addname.handleAddName(req,res,db)});
 //GENERATE THE CHARACTER
 app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
+//REPLY FROM CLOUDINARY MODERATION
+app.post('/cloudnotification', (req, res)=>{ cloudnotification.handleCloudNotification(req, res, db)});
 
 app.listen(process.env.PORT || 3000, ()=> {
    console.log("App running on port ${process.env.PORT}")
