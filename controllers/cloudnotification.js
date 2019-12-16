@@ -1,6 +1,6 @@
 const handleCloudNotification = (req, res, db,) => {
    db('mod_nameshuman')
-         .insert({'name': req.body})
+         .insert({'name': req.body[0]})
          .then(data=> {
             res.status(200).json('success')
          })
