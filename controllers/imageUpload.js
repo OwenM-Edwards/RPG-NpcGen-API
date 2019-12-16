@@ -8,8 +8,9 @@ const handleCharImage = (req, res, db, cloudinary) => {
       },
          { moderation: 'manual' }
       )
-      .then(
-      )
+      .then(data=>{
+         res.status(200).json(data)
+      })
       .catch( 
          res.status(400).json('Error adding image')
       )
