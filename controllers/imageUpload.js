@@ -1,11 +1,13 @@
 //POSTING IMAGES
 const handleCharImage = (req, res, db, cloudinary) => {
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
-      // { moderation: 'manual',
+      
       // notification_url: "https://mysite.example.com/mod_endpoint"  },
       function(error, result) {
          saveImageToDatabase(req, result.url, result.public_id, db)
-      })
+      },
+         { moderation: 'manual' }
+      )
       .then(
       )
       .catch( 

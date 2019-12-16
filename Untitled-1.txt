@@ -1,0 +1,6 @@
+CREATE TABLE raceagemax (
+	id serial NOT NULL,
+	maxage int2 NULL,
+	race varchar(50) NULL,
+	CONSTRAINT raceagemax_pkey PRIMARY KEY (id)
+);
