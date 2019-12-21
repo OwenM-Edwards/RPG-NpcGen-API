@@ -22,9 +22,17 @@ saveImageToDatabase = (req,url, id,db) => {
    }
    let race = req.body.race;
    let role = req.body.role;
-   db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
-   .then(data=>{
-   })
+   db('test_table')
+      .insert({test: 'hey'})
+      .then(data=> {
+         db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
+         .then(data=>{
+         })
+      })
+      .catch(error=>{
+         res.status(800).json('duplicate last name')
+      })
+   
 }
 
 module.exports = {
