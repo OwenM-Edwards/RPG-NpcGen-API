@@ -27,7 +27,9 @@ const db = knex({
 
 app.use(bodyParser.json({limit: '90mb', extended: true}));
 app.use(cors())
-app.get('/', (req, res)=>{ res.send('it is working') })
+
+
+app.get('/', (req, res)=>{ res.send(serverText) })
 //ADDIING NEW ROLEPLAY PROMPT
 app.post('/addroleplay', (req, res)=>{ addroleplay.handleAddRoleplay(req, res, db)});
 //ADDIING NEW INTRIGUE
@@ -38,7 +40,6 @@ app.post('/charimage', (req, res)=>{ charimage.handleCharImage(req, res, db, clo
 app.post('/addname', (req, res)=>{ addname.handleAddName(req,res,db)});
 //GENERATE THE CHARACTER
 app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
-
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ cloudnotification.handleCloudNotification(req, res, db)});
 
