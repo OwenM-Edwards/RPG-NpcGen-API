@@ -4,7 +4,7 @@ const handleCharImage = (req, res, db, cloudinary) => {
       { moderation: 'manual' },
       { notification_url: "https://safe-dawn-37731.herokuapp.com/cloudnotification"  },
       function(error, result) {
-         // saveImageToDatabase(req, result.url, result.public_id, db)
+         saveImageToDatabase(req, result.url, result.public_id, db)
          console.log('success')
       })
       .then(data=>{
