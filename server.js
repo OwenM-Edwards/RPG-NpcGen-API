@@ -40,7 +40,16 @@ app.post('/addname', (req, res)=>{ addname.handleAddName(req,res,db)});
 app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 //REPLY FROM CLOUDINARY MODERATION
-app.post('/cloudnotification', (req, res)=>{ cloudnotification.handleCloudNotification(req, res, db)});
+app.post('/cloudnotification', (req, res)=>{ 
+   db('test_table')
+      .insert({test: 'heyho'})
+      .then(data=> {
+         res.status(200).json('success')
+      })
+      .catch(error=>{
+         res.status(800).json('duplicate last name')
+      })
+   });
 
 app.listen(process.env.PORT || 3000, ()=> {
    console.log("App running on port ${process.env.PORT}")
