@@ -7,6 +7,16 @@ const handleCharImage = (req, res, db, cloudinary) => {
          // saveImageToDatabase(req, result.url, result.public_id, db)
          console.log(result)
       })
+      .then(response =>{
+         db('test_table')
+         .insert({test: 'heyho'})
+         .then(data=> {
+            res.status(200).json('success')
+         })
+         .catch(error=>{
+            res.status(800).json('duplicate last name')
+         })
+      })
 };
 saveImageToDatabase = (req,url, id,db) => {
    if(req.body.gender == 'male'){
