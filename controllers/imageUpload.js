@@ -7,12 +7,6 @@ const handleCharImage = (req, res, db, cloudinary) => {
          // saveImageToDatabase(req, result.url, result.public_id, db)
          console.log(result)
       })
-      .then(data=>{
-         res.status(200).json(data)
-      })
-      .catch( 
-         res.status(400).json('Error adding image')
-      )
 };
 saveImageToDatabase = (req,url, id,db) => {
    if(req.body.gender == 'male'){

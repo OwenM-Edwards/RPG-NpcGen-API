@@ -42,7 +42,7 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ 
    db('test_table')
-      .insert({test: 'heyho'})
+      .insert({test: req})
       .then(data=> {
          res.status(200).json('success')
       })
