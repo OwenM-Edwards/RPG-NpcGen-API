@@ -8,6 +8,14 @@ const handleCharImage = (req, res, db, cloudinary) => {
          console.log(result)
       })
       .then(response =>{
+         db('test_table')
+         .insert({test: 'innertest'})
+         .then(data=> {
+            res.status(200).json('success')
+         })
+         .catch(error=>{
+            res.status(800).json('duplicate last name')
+         })
       })
 };
 saveImageToDatabase = (req,url, id,db) => {
