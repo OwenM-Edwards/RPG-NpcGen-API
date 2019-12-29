@@ -2,7 +2,7 @@ const handleCloudNote = (req, res, db,) => {
    if(req.body.moderation_status === 'approved') {
       console.log(req.body.url)
       db('testing')
-      .insert({url: req.body.url})
+      .insert({'url': "hello"})
       .then(data=> {
          res.status(200).json({ success: true})
       }) 
