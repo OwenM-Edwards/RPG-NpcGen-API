@@ -49,7 +49,7 @@ app.post('/cloudnotification', (req, res)=>{
    }
 
    db('testing')
-      .insert({'height': req.body.height}) 
+      .insert({height: req.body.height}) 
       .then(data=> {
          res.status(200).json('success')
       })
