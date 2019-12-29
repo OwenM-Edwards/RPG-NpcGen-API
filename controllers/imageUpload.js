@@ -6,8 +6,8 @@ const handleCharImage = (req, res, db, cloudinary) => {
          if (error) {
             // handle error
          } else {
-            // saveImageToDatabase(req, result, db)
-            console.log(result);
+            saveImageToDatabase(req, result, db)
+            // console.log(result);
          }
       });
 };
@@ -19,8 +19,8 @@ saveImageToDatabase = (req,result,db) => {
    }
    let race = req.body.race;
    let role = req.body.role;
-   let url = result.body.url
-   let id = result.body.public_id
+   let url = result.url
+   let id = result.public_id
    db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':charGender})
    .then(data=>{
    })
