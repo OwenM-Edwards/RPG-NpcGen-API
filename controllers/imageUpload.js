@@ -1,8 +1,7 @@
 //POSTING IMAGES
 const handleCharImage = (req, res, db, cloudinary) => {
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
-      { moderation: 'manual' },
-      {tags: 'basic_sample'},
+      { moderation: 'manual',tags: 'basic_sample' },
       function(error, result) {
          if (error) {
             // handle error
