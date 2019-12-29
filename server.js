@@ -43,13 +43,13 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 app.post('/cloudnotification', (req, res)=>{ 
 
    if(req.body.type === 'upload') {
-      console.log('yes');
+      console.log(req);
    } else {
       console.log('no');
    }
 
    db('testing')
-      .insert({'height': req.height}) 
+      .insert({'height': req.body.height}) 
       .then(data=> {
          res.status(200).json('success')
       })
