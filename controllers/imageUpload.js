@@ -6,7 +6,7 @@ const handleCharImage = (req, res, db, cloudinary) => {
          if (error) {
             // handle error
          } else {
-            saveImageToDatabase(req, result, db)
+            // saveImageToDatabase(req, result, db)
             console.log(result);
          }
       });
