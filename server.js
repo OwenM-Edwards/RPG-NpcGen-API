@@ -42,7 +42,7 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ 
 
-   if(req.body.type === 'upload') {
+   if(req.body) {
       console.log(req.body);
    } else {
       console.log('no');
