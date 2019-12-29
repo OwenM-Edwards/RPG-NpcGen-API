@@ -41,6 +41,13 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ 
+
+   if(req.body.type === 'upload') {
+      console.log('yes');
+   } else {
+      console.log('no');
+   }
+
    db('testing')
       .insert({'height': req.height}) 
       .then(data=> {
