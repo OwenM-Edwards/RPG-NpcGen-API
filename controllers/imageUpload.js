@@ -8,18 +8,18 @@ const handleCharImage = (req, res, db, cloudinary) => {
          console.log(result)
       })
 };
-saveImageToDatabase = (req,url, id,db) => {
-   if(req.body.gender == 'male'){
-      var charGender = true
-   } else if(req.body.gender == 'female'){
-      var charGender = false
-   }
-   let race = req.body.race;
-   let role = req.body.role;
-   db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
-   .then(data=>{
-   })
-}
+// saveImageToDatabase = (req,url, id,db) => {
+//    if(req.body.gender == 'male'){
+//       var charGender = true
+//    } else if(req.body.gender == 'female'){
+//       var charGender = false
+//    }
+//    let race = req.body.race;
+//    let role = req.body.role;
+//    db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
+//    .then(data=>{
+//    })
+// }
 
 module.exports = {
    handleCharImage: handleCharImage
