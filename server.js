@@ -41,22 +41,19 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ 
-
    if(req.body.moderation_status === 'approved') {
-      console.log('ready');
-   } else {
-      console.log('no');
-   }
-
-   db('testing')
-      .insert({height: req.body.height}) 
+      db('testing')
+      .insert({height: req.body.version})
       .then(data=> {
-         res.status(200).json('success')
-      })
+         res.status(200).json({ success: true})
+      }) 
       .catch(error=>{
          res.status(800).json('duplicate last name')
       })
-   });
+   } else {
+      console.log('no');
+   }
+});
 
 app.listen(process.env.PORT || 3000, ()=> {
    console.log("App running on port ${process.env.PORT}")
