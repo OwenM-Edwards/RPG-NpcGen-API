@@ -12,3 +12,7 @@ const handleCloudNote = (req, res, db,) => {
       console.log('no');
    }
 }
+
+module.exports = {
+   handleCloudNote: handleCloudNote
+};
