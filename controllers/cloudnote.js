@@ -1,6 +1,6 @@
 const handleCloudNote = (req, res, db,) => {
    if(req.body.moderation_status === 'approved') {
-      console.log(req)
+      console.log(req.body)
 
       // db('img' + req.body.)
       //    .insert({'moderation':true})
