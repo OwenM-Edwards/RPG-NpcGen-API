@@ -1,5 +1,6 @@
 const handleCloudNote = (req, res, db,) => {
    if(req.body.moderation_status === 'approved') {
+      console.log(req.body)
       db('testing')
          .insert({'url':req.body.url})
          .then(data=>{
