@@ -42,8 +42,8 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ 
 
-   if(req.body) {
-      console.log(req.body);
+   if(req.body.moderation_status === 'approved') {
+      console.log('ready');
    } else {
       console.log('no');
    }
