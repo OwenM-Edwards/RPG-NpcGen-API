@@ -19,7 +19,7 @@ saveImageToDatabase = (req,url, id,db) => {
    }
    let race = req.body.race;
    let role = req.body.role;
-   db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':gender})
+   db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':charGender})
    .then(data=>{
    })
 }
