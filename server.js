@@ -43,7 +43,7 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 app.post('/cloudnotification', (req, res)=>{ 
 
    if(req.body.type === 'upload') {
-      console.log(req);
+      console.log(req.body);
    } else {
       console.log('no');
    }

@@ -6,7 +6,7 @@ const handleCharImage = (req, res, db, cloudinary) => {
          if (error) {
             // handle error
          } else {
-            console.log(result);
+         //    console.log(result);
          }
       });
 };
