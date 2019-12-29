@@ -3,7 +3,7 @@ const handleCharImage = (req, res, db, cloudinary) => {
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
       { moderation: 'manual' },
       { notification_url: "https://safe-dawn-37731.herokuapp.com/cloudnotification"  },
-      function(error, result) {
+      function(result) {
          // saveImageToDatabase(req, result.url, result.public_id, db)
          console.log(result)
       })
