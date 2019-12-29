@@ -9,7 +9,7 @@ const addname = require('./controllers/addname');
 const genchar = require('./controllers/genchar');
 const addroleplay = require('./controllers/addRoleplay');
 const addintrigue = require('./controllers/addIntrigue');
-const cloudnotification = require('./controllers/cloudnotification');
+// const cloudnotification = require('./controllers/cloudnotification');
 const app =  express();
 
 cloudinary.config({ 

@@ -3,10 +3,13 @@ const handleCharImage = (req, res, db, cloudinary) => {
    cloudinary.uploader.upload(req.body.image[0].src.base64, 
       { moderation: 'manual' },
       { notification_url: "https://safe-dawn-37731.herokuapp.com/cloudnotification"  },
-      function(result) {
-         // saveImageToDatabase(req, result.url, result.public_id, db)
-         console.log(result)
-      })
+      function(error, result) {
+         if (error) {
+            // handle error
+         } else {
+            console.log(result);
+         }
+      });
 };
 // saveImageToDatabase = (req,url, id,db) => {
 //    if(req.body.gender == 'male'){
