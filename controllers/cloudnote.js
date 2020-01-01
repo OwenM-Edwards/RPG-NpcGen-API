@@ -18,5 +18,5 @@ const handleCloudNote = (req, res, db,) => {
 }
 
 module.exports = {
-   handleCloudNote: handleCloudNote
+   handleCloudNote: handleCloudNote 
 };
