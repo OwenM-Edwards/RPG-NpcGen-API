@@ -4,13 +4,13 @@ const handleCharImage = (req, res, db, cloudinary) => {
       { moderation: 'manual',tags: req.body.race },
       function(error, result) {
          if (error) {
-            res.status(500)
+            console.log('error')
          } else {
-            saveImageToDatabase(req, result, db)
+            saveImageToDatabase(req, result, db,res)
          }
       });
 };
-saveImageToDatabase = (req,result,db) => {
+saveImageToDatabase = (req,result,db,res) => {
    if(req.body.gender == 'male'){
       var charGender = true
    } else if(req.body.gender == 'female'){
