@@ -97,11 +97,11 @@ const handleGenChar = (req, res, db,) => {
    returnedChar[1] = generateCharImage(db,race,gender);
    returnedChar[2] = generateCharAge(db,race);
    returnedChar[3] = generateCharLastName(db,race);
-   returnedChar[4] = generateCharIntrigue(db)
-   returnedChar[5] = generateCharRoleplay(db)
-   returnedChar[6] = role
-   returnedChar[7] = race
-   returnedChar[8] = gender   
+   returnedChar[4] = generateCharIntrigue(db);
+   returnedChar[5] = generateCharRoleplay(db);
+   returnedChar[6] = role;
+   returnedChar[7] = race;
+   returnedChar[8] = gender;  
    console.log(returnedChar)
    res.status(200).json(returnedChar)
 }
