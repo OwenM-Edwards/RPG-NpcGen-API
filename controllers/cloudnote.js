@@ -1,10 +1,9 @@
 const handleCloudNote = (req, res, db,) => {
    if(req.body.moderation_status === 'approved') {
-      let moderationStatus = true
       let imgKey = req.body.public_id;
       console.log(req.body)
 
-      if(searchHumanTable(moderationStatus,imgKey, db)){
+      if(searchHumanTable(imgKey, db)){
          console.log('Success Human')
          res.status(200)
       }
@@ -22,7 +21,7 @@ const handleCloudNote = (req, res, db,) => {
    }
 }
 
-searchHumanTable = (imgKey, db) => {
+searchHumanTable = (imgKey, db) =>{
    db('imghuman')
       .insert({moderation:true})
       .where({key:imgKey})
@@ -33,10 +32,10 @@ searchHumanTable = (imgKey, db) => {
       return false
    })
 }
-searchOrcTable = (moderationStatus, imgKey, db) =>{
+searchOrcTable = (imgKey, db) =>{
    db('imgorc')
-   .insert({moderation:moderationStatus})
-   .where({key:imgKey})
+      .insert({moderation:true})
+      .where({key:imgKey})
    .then(data=>{
       return true
    })
