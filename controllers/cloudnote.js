@@ -26,10 +26,10 @@ searchHumanTable = (imgKey, db) =>{
       .where({'key':imgKey})
       .update({'moderation':true})
    .then(data=>{
-      console.log(data)
+      return true
    })
    .catch(error=>{
-      console.log(error)
+      return false
    })
 }
 searchOrcTable = (imgKey, db) =>{
@@ -37,10 +37,10 @@ searchOrcTable = (imgKey, db) =>{
       .where({'key':imgKey})
       .update({'moderation':true})
    .then(data=>{
-      console.log(data)
+      return true
    })
    .catch(error=>{
-      console.log(error)
+      return false
    })
 }
 
