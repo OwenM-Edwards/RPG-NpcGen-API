@@ -23,8 +23,8 @@ const handleCloudNote = (req, res, db,) => {
 
 searchHumanTable = (imgKey, db) =>{
    db('imghuman')
-      .insert({'moderation':true})
       .where({'key':imgKey})
+      .update({'moderation':true})
    .then(data=>{
       console.log(data)
    })
@@ -34,8 +34,8 @@ searchHumanTable = (imgKey, db) =>{
 }
 searchOrcTable = (imgKey, db) =>{
    db('imgorc')
-      .insert({'moderation':true})
       .where({'key':imgKey})
+      .update({'moderation':true})
    .then(data=>{
       console.log(data)
    })
