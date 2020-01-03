@@ -1,9 +1,6 @@
 const handleCloudNote = (req, res, db,) => {
-   if(req.body.moderation_status === 'Moderation approved') {
-      let moderationStatus = false
-      if(req.body.moderation_status === 'approved') {
-         moderationStatus = true
-      }
+   if(req.body.moderation_status === 'approved') {
+      let moderationStatus = true
       let imgKey = req.body.public_id;
       console.log(req.body)
 
