@@ -7,7 +7,7 @@ const handleCloudNote = (req, res, db,) => {
          console.log('Success Human')
          res.status(200)
       }
-      else if(searchOrcTable(moderationStatus,imgKey, db)){
+      else if(searchOrcTable(imgKey, db)){
          console.log('Success Orc')
          res.status(200)
       }
