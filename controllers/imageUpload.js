@@ -4,10 +4,9 @@ const handleCharImage = (req, res, db, cloudinary) => {
       { moderation: 'manual',tags: req.body.race },
       function(error, result) {
          if (error) {
-            // handle error
+            res.status(500)
          } else {
             saveImageToDatabase(req, result, db)
-            // console.log(result);
          }
       });
 };
@@ -23,9 +22,10 @@ saveImageToDatabase = (req,result,db) => {
    let id = result.public_id
    db('img'+race).insert({'url':url, 'role':role, 'key':id, 'gender':charGender, 'moderation':false})
    .then(data=>{
+      res.status(200)
    })
    .catch(error=>{
-      console.log(error)
+      res.status(500)
    })
 }
 
