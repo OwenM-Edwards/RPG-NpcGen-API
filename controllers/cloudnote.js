@@ -1,7 +1,7 @@
 const handleCloudNote = (req, res, db,) => {
    if(req.body.moderation_status === 'approved') {
       let imgKey = req.body.public_id;
-      console.log(req.body)
+      console.log('Moderation approved')
 
       searchHumanTable(imgKey, db);
       searchOrcTable(imgKey, db);
