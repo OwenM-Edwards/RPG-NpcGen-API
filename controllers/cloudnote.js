@@ -3,18 +3,8 @@ const handleCloudNote = (req, res, db,) => {
       let imgKey = req.body.public_id;
       console.log(req.body)
 
-      if(searchHumanTable(imgKey, db)){
-         console.log('Success Human')
-         res.status(200)
-      }
-      else if(searchOrcTable(imgKey, db)){
-         console.log('Success Orc')
-         res.status(200)
-      }
-      else {
-         console.log('Failure Both')
-         res.status(500)
-      }
+      searchHumanTable(imgKey, db);
+      searchOrcTable(imgKey, db);
 
    } else {
       console.log('Moderation not approved');
@@ -26,12 +16,8 @@ searchHumanTable = (imgKey, db) =>{
       .where({'key':imgKey})
       .update({'moderation':true})
    .then(data=>{
-      console.log('yesyes')
-      return true
    })
    .catch(error=>{
-      console.log('nono')
-      return false
    })
 }
 searchOrcTable = (imgKey, db) =>{
@@ -39,12 +25,8 @@ searchOrcTable = (imgKey, db) =>{
       .where({'key':imgKey})
       .update({'moderation':true})
    .then(data=>{
-      console.log('yesyes')
-      return true
    })
    .catch(error=>{
-      console.log('nono')
-      return false
    })
 }
 
