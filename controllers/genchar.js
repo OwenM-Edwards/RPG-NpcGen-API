@@ -17,75 +17,92 @@ const handleGenChar = (req, res, db,) => {
    } else {
       var role = req.body.role;
    }
-   
-
-
 
    //GEN THE CHARACTER CHAIN
-   //GEN THE NAME
-   db('names'+race)
-      .select('name')
-      .where({gender:gender})
-      .orderByRaw('RANDOM() LIMIT 1')
-   //SAVE NAME TEMP
-   .then(returnedName=>{
-      let returnName = returnedName
-      let returnRole = role
+   let returnedChar = []
+   returnedChar[0] = generateCharFirstName(db,race,gender);
+   returnedChar[1] = generateCharImage(db,race,gender);
+   returnedChar[2] = generateCharAge(db,race);
+   returnedChar[3] = generateCharLastName(db,race);
+   returnedChar[4] = generateCharIntrigue(db)
+   returnedChar[5] = generateCharRoleplay(db)
+   returnedChar[6] = role
+   returnedChar[7] = race
+   returnedChar[8] = gender   
+   res.status(200).json(returnedCharn)
 
-      //GEN THE IMAGE 
+      
+   generateCharFirstName = (db,race,gender) =>{
+      db('names'+race)
+         .select('name')
+         .where({gender:gender})
+         .orderByRaw('RANDOM() LIMIT 1')
+      .then(data =>{
+         return data
+      })
+      .catch(error =>{
+         console.log(error)
+      })
+   }
+   generateCharImage = (db,race,gender) =>{
       db('img'+race)
          .select('url')
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
-      //SAVETHEIMAGETEMP
-      .then(returnedImage=>{
-         let returnImage = returnedImage
-            //GEN CHAR AGE
-            db('raceagemax')
-               .select('maxage')
-               .where('race', '=', race)
-            .then(returnedAgeMax => {
-               //GET LAST NAME
-               let returnAge = returnedAgeMax
-                  db('names'+race+'last')
-                     .select('lastname')
-                     .orderByRaw('RANDOM() LIMIT 1')
-                  
-                  .then(returnedLastName => {
-                     // GET INTRIGUE
-                     let returnLastName = returnedLastName
-                        db('descintrigue')
-                           .select('intrigue')
-                           .orderByRaw('RANDOM() LIMIT 1')
-
-                           .then(returnedIntrigue => {
-                              let returnIntrigue = returnedIntrigue
-                                 db('descroleplay')
-                                    .select('roleplay')
-                                    .orderByRaw('RANDOM() LIMIT 3')
-                                 .then(returnedRoleplay => {
-        
-                                    let finalReturn = []
-                                    finalReturn[0] = returnName
-                                    finalReturn[1] = returnImage
-                                    finalReturn[2] = returnAge
-                                    finalReturn[3] = returnedLastName
-                                    finalReturn[4] = returnedIntrigue
-                                    finalReturn[5] = returnedRoleplay
-                                    finalReturn[6] = role
-                                    finalReturn[7] = race
-                                    finalReturn[8] = gender   
-
-                                    res.json(finalReturn)
-                                 })
-                              })
-                     //GENERATE FINAL RETURN
-                     
-                  })
-            })
+      .then(data=>{
+         return data
       })
-   })
+      .catch(error=>{
+         console.log(error)
+      })
+   }
+   generateCharAge = (db,race) =>{
+      db('raceagemax')
+         .select('maxage')
+         .where('race', '=', race)
+      .then(data=>{
+         return data
+      })
+      .catch(error=>{
+         console.log(error)
+      })
+   }
+   generateCharLastName = (db,race) =>{
+      db('names'+race+'last')
+         .select('lastname')
+         .orderByRaw('RANDOM() LIMIT 1')
+      .then(data =>{
+         return data
+      })
+      .catch(error=>{
+         console.log(error)
+      })
+                  
+   }
+   generateCharIntrigue = (db) =>{
+      db('descintrigue')
+         .select('intrigue')
+         .orderByRaw('RANDOM() LIMIT 1')
+      .then(data =>{
+         return data
+      })
+      .catch(error=>{
+         console.log(error)
+      })
+   }
+   generateCharRoleplay = (db) =>{
+      db('descroleplay')
+         .select('roleplay')
+         .orderByRaw('RANDOM() LIMIT 3')
+      .then(data =>{
+         return data
+      })
+      .catch(error=>{
+         console.log(error)
+      })
+   }
 }
+
 module.exports = {
    handleGenChar: handleGenChar
 };
