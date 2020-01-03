@@ -8,6 +8,7 @@ const handleCloudNote = (req, res, db,) => {
 
    } else {
       console.log('Moderation not approved');
+      res.status(500)
    }
 }
 

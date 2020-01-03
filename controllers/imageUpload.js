@@ -5,6 +5,7 @@ const handleCharImage = (req, res, db, cloudinary) => {
       function(error, result) {
          if (error) {
             console.log('error')
+            res.status(500)
          } else {
             saveImageToDatabase(req, result, db,res)
          }
