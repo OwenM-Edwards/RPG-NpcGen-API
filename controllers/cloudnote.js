@@ -1,20 +1,51 @@
 const handleCloudNote = (req, res, db,) => {
-   if(req.body.moderation_status === 'approved') {
+   if(req.body.moderation_status === 'Moderation approved') {
+      let moderationStatus = false
+      if(req.body.moderation_status === 'approved') {
+         moderationStatus = true
+      }
+      let imgKey = req.body.public_id;
       console.log(req.body)
 
-      db('imghuman').fullOuterJoin('imgorc', 'key')
-         .insert({'moderation':true})
-         .where({'key':req.body.public_id})
-         .then(data=>{
-            res.status(200).json({ success: true})
-         }) 
-         .catch(error=>{
-            console.log(error)
-            res.status(405).json({ success: false})
-         })
+      if(searchHumanTable(moderationStatus,imgKey, db)){
+         console.log('Success Human')
+         res.status(200)
+      }
+      else if(searchOrcTable(moderationStatus,imgKey, db)){
+         console.log('Success Orc')
+         res.status(200)
+      }
+      else {
+         console.log('Failure Both')
+         res.status(500)
+      }
+
    } else {
-      console.log('no');
+      console.log('Moderation not approved');
    }
+}
+
+searchHumanTable = (imgKey, db) => {
+   db('imghuman')
+      .insert({moderation:true})
+      .where({key:imgKey})
+   .then(data=>{
+      return true
+   })
+   .catch(error=>{
+      return false
+   })
+}
+searchOrcTable = (moderationStatus, imgKey, db) =>{
+   db('imgorc')
+   .insert({moderation:moderationStatus})
+   .where({key:imgKey})
+   .then(data=>{
+      return true
+   })
+   .catch(error=>{
+      return false
+   })
 }
 
 module.exports = {
