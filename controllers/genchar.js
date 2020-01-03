@@ -102,7 +102,7 @@ const handleGenChar = (req, res, db,) => {
    returnedChar[6] = role
    returnedChar[7] = race
    returnedChar[8] = gender   
-   res.status(200).json(returnedCharn)
+   res.status(200).json(returnedChar)
 }
 
 module.exports = {
