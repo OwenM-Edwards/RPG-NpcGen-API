@@ -19,17 +19,7 @@ const handleGenChar = (req, res, db,) => {
    }
 
    //GEN THE CHARACTER CHAIN
-   let returnedChar = []
-   returnedChar[0] = generateCharFirstName(db,race,gender);
-   returnedChar[1] = generateCharImage(db,race,gender);
-   returnedChar[2] = generateCharAge(db,race);
-   returnedChar[3] = generateCharLastName(db,race);
-   returnedChar[4] = generateCharIntrigue(db)
-   returnedChar[5] = generateCharRoleplay(db)
-   returnedChar[6] = role
-   returnedChar[7] = race
-   returnedChar[8] = gender   
-   res.status(200).json(returnedCharn)
+   
 
       
    generateCharFirstName = (db,race,gender) =>{
@@ -101,6 +91,18 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
+
+   let returnedChar = []
+   returnedChar[0] = generateCharFirstName(db,race,gender);
+   returnedChar[1] = generateCharImage(db,race,gender);
+   returnedChar[2] = generateCharAge(db,race);
+   returnedChar[3] = generateCharLastName(db,race);
+   returnedChar[4] = generateCharIntrigue(db)
+   returnedChar[5] = generateCharRoleplay(db)
+   returnedChar[6] = role
+   returnedChar[7] = race
+   returnedChar[8] = gender   
+   res.status(200).json(returnedCharn)
 }
 
 module.exports = {
