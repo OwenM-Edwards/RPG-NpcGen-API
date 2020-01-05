@@ -22,7 +22,7 @@ const handleGenChar = (req, res, db,) => {
    
    let returnedChar = []
 
-   generateCharFirstName = (db,race,gender) =>{
+   const generateCharFirstName = (db,race,gender) =>{
       return db.transaction((trx) => {
          db('names'+race)
          .select('name')
