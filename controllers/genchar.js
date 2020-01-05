@@ -21,29 +21,19 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
    let returnedChar = []
-
-   const generateCharFirstName = (db,race,gender) =>{
-      return db.transaction((trx) => {
-         db('names'+race)
+   generateCharFirstName(db,race,gender);
+   generateCharFirstName = (db,race,gender) =>{
+      db('names'+race)
          .select('name')
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
-
-         .then(trx.commit)
-         .catch(error =>{
-            trx.rollback();
-            console.log(error)
-         })
-      })
-
       .then(data =>{
-         return data;
+         returnedChar[0] = data
       })
       .catch(error =>{
          console.log(error)
       })
    }
-
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
          .select('url')
@@ -102,8 +92,8 @@ const handleGenChar = (req, res, db,) => {
       })
    }
 
-   
-   returnedChar[0] = generateCharFirstName(db,race,gender);
+
+
    returnedChar[1] = generateCharImage(db,race,gender);
    returnedChar[2] = generateCharAge(db,race);
    returnedChar[3] = generateCharLastName(db,race);
