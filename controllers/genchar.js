@@ -36,7 +36,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    generateCharFirstName(db,race,gender, (data)=>{
-      console.log(data);
+      console.log(data.name);
    });
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
