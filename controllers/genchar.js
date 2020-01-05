@@ -21,7 +21,9 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
    let returnedChar = []
-      
+   saveFirstName = (name) =>{
+      returnedChar[0] = name;
+   }
    generateCharFirstName = (db,race,gender) =>{
       db('names'+race)
          .select('name')
@@ -34,9 +36,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   saveFirstName = (data) =>{
-      returnedChar[0] = data;
-   }
+
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
          .select('url')
