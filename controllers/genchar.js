@@ -21,16 +21,23 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
    let returnedChar = []
-   saveFirstName = (name) =>{
-      returnedChar[0] = name;
-   }
+
    generateCharFirstName = (db,race,gender) =>{
-      db('names'+race)
+      return db.transaction((trx) => {
+         db('names'+race)
          .select('name')
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
+
+         .then(trx.commit)
+         .catch(error =>{
+            trx.rollback();
+            console.log(error)
+         })
+      })
+
       .then(data =>{
-         saveFirstName(data);
+         return data;
       })
       .catch(error =>{
          console.log(error)
