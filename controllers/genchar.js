@@ -21,7 +21,6 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
    let returnedChar = []
-   generateCharFirstName(db,race,gender);
    generateCharFirstName = (db,race,gender) =>{
       db('names'+race)
          .select('name')
@@ -34,6 +33,8 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
+   generateCharFirstName(db,race,gender);
+   
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
          .select('url')
