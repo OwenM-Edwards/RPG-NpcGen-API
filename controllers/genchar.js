@@ -21,8 +21,7 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
 
-
-      
+   let returnedChar = []
    generateCharFirstName = (db,race,gender,callback) =>{
       db('names'+race)
          .select('name')
@@ -95,7 +94,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   let returnedChar = []
+
    returnedChar[1] = 'hello';
    returnedChar[2] = generateCharAge(db,race);
    returnedChar[3] = generateCharLastName(db,race);
