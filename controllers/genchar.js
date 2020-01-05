@@ -20,7 +20,7 @@ const handleGenChar = (req, res, db,) => {
 
    //GEN THE CHARACTER CHAIN
    
-
+   let returnedChar = []
       
    generateCharFirstName = (db,race,gender) =>{
       db('names'+race)
@@ -28,11 +28,14 @@ const handleGenChar = (req, res, db,) => {
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
-         return data
+         saveFirstName(data);
       })
       .catch(error =>{
          console.log(error)
       })
+   }
+   saveFirstName = (data) =>{
+      returnedChar[0] = data;
    }
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
@@ -92,7 +95,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
 
-   let returnedChar = []
+   
    returnedChar[0] = generateCharFirstName(db,race,gender);
    returnedChar[1] = generateCharImage(db,race,gender);
    returnedChar[2] = generateCharAge(db,race);
