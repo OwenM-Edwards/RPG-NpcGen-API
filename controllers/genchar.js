@@ -96,7 +96,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
 
-
+   returnedChar[2] = 'hello';
    returnedChar[2] = generateCharAge(db,race);
    returnedChar[3] = generateCharLastName(db,race);
    returnedChar[4] = generateCharIntrigue(db);
