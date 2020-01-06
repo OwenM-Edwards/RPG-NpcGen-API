@@ -123,7 +123,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    generateCharRoleplay(db, (data)=>{
-      returnedChar[5] = data[0];
+      returnedChar[5] = data;
       console.log(returnedChar);
    });
 
