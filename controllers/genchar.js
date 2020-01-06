@@ -69,7 +69,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    generateCharAge(db,race, (data)=>{
-      returnedChar[2] = data[0].maxage;
+      returnedChar[2] = data;
    });
 
 
