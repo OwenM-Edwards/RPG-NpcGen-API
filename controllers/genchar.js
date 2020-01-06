@@ -106,6 +106,11 @@ const handleGenChar = (req, res, db,) => {
    });
 
 
+   returnedChar[6] = role;
+   returnedChar[7] = race;
+   returnedChar[8] = gender;  
+   
+
    generateCharRoleplay = (db,callback) =>{
       db('descroleplay')
          .select('roleplay')
@@ -119,13 +124,9 @@ const handleGenChar = (req, res, db,) => {
    }
    generateCharRoleplay(db, (data)=>{
       returnedChar[5] = data[0].roleplay;
+      console.log(returnedChar);
    });
 
-
-   returnedChar[6] = role;
-   returnedChar[7] = race;
-   returnedChar[8] = gender;  
-   console.log(returnedChar)
    res.status(200).json(returnedChar)
 }
 
