@@ -28,6 +28,7 @@ const handleGenChar = (req, res, db,) => {
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
+         console.log('hey')
          callback(data)
       })
       .catch(error =>{
