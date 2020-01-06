@@ -1,6 +1,6 @@
 const handleGenChar = (req, res, db,) => {
-   let randomGenderArr = [true,false];
-   let randomRaceArr = ['human','orc'];
+   let randomGenderArr = [true,true];
+   let randomRaceArr = ['human','human'];
    let randomRoleArr = ['merchant','wizard'];
    if(req.body.gender === 'random'){
       var gender = randomGenderArr[Math.floor(Math.random()*randomGenderArr.length)];
@@ -22,13 +22,13 @@ const handleGenChar = (req, res, db,) => {
    
 
    let returnedChar = []
+
    generateCharFirstName = (db,race,gender,callback) =>{
       db('names'+race)
          .select('name')
          .where({gender:gender})
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
-         console.log('hey')
          callback(data)
       })
       .catch(error =>{
@@ -36,13 +36,13 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    generateCharFirstName(db,race,gender, (data)=>{
-      console.log(data)
+      returnedChar[0] = data;
    });
+
    generateCharImage = (db,race,gender) =>{
       db('img'+race)
          .select('url')
          .where({gender:gender})
-         .whereNotNull('id')
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data=>{
          callback(data)
