@@ -42,6 +42,7 @@ const handleGenChar = (req, res, db,) => {
       db('img'+race)
          .select('url')
          .where({gender:gender})
+         .whereNotNull('id')
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data=>{
          callback(data)
