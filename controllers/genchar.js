@@ -37,10 +37,10 @@ const handleGenChar = (req, res, db,) => {
    }
    generateCharFirstName(db,race,gender, (data)=>{
       returnedChar[0] = data[0].name;
-      console.log(returnedChar);
    });
 
-   generateCharImage = (db,race,gender) =>{
+
+   generateCharImage = (db,race,gender,callback) =>{
       db('img'+race)
          .select('url')
          .where({gender:gender})
@@ -52,61 +52,80 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharAge = (db,race) =>{
+   generateCharImage(db,race,gender, (data)=>{
+      returnedChar[1] = data[0].url;
+   });
+
+
+   generateCharAge = (db,race,callback) =>{
       db('raceagemax')
          .select('maxage')
          .where('race', '=', race)
       .then(data=>{
-         return data
+         callback(data);
       })
       .catch(error=>{
          console.log(error)
       })
    }
-   generateCharLastName = (db,race) =>{
+   generateCharAge(db,race, (data)=>{
+      returnedChar[2] = data[0].maxage;
+   });
+
+
+   generateCharLastName = (db,race,callback) =>{
       db('names'+race+'last')
          .select('lastname')
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
-         return data
+         callback(data);
       })
       .catch(error=>{
          console.log(error)
       })
                   
    }
-   generateCharIntrigue = (db) =>{
+   generateCharLastName(db,race, (data)=>{
+      returnedChar[3] = data[0].lastname;
+   });
+
+
+   generateCharIntrigue = (db,callback) =>{
       db('descintrigue')
          .select('intrigue')
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
-         return data
+         callback(data);
       })
       .catch(error=>{
          console.log(error)
       })
    }
-   generateCharRoleplay = (db) =>{
+   generateCharIntrigue(db, (data)=>{
+      returnedChar[4] = data[0].intrigue;
+   });
+
+
+   generateCharRoleplay = (db,callback) =>{
       db('descroleplay')
          .select('roleplay')
          .orderByRaw('RANDOM() LIMIT 3')
       .then(data =>{
-         return data
+         callback(data);
       })
       .catch(error=>{
          console.log(error)
       })
    }
+   generateCharRoleplay(db, (data)=>{
+      returnedChar[5] = data[0].roleplay;
+   });
 
-   returnedChar[1] = 'hello';
-   returnedChar[2] = generateCharAge(db,race);
-   returnedChar[3] = generateCharLastName(db,race);
-   returnedChar[4] = generateCharIntrigue(db);
-   returnedChar[5] = generateCharRoleplay(db);
+
    returnedChar[6] = role;
    returnedChar[7] = race;
    returnedChar[8] = gender;  
-   // console.log(returnedChar)
+   console.log(returnedChar)
    res.status(200).json(returnedChar)
 }
 
