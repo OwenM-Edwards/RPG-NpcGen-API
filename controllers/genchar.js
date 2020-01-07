@@ -36,7 +36,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    generateCharFirstName(db,race,gender, (data)=>{
-      returnedChar[0] = data[0].name;
+      returnedChar[0] = 'hey owen';
    });
 
 
