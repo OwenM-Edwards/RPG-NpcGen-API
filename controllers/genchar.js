@@ -122,7 +122,7 @@ const handleGenChar = (req, res, db,) => {
       returnedChar[5] = data;
    });
 
-
+   console.log(returnedChar);
    returnedChar[6] = role;
    returnedChar[7] = race;
    returnedChar[8] = gender;  
