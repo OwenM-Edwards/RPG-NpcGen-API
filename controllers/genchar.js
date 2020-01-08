@@ -114,9 +114,10 @@ const handleGenChar = (req, res, db,) => {
    }
    
    function load() {
-      return new Promise(resolve => {
+      return new Promise((resolve,reject) => {
          let returnedChar = [];
          returnedChar[1] = 2;
+
          generateCharFirstName(db,race,gender, (data)=>{
             returnedChar[0] = 'test';
          });
@@ -139,8 +140,12 @@ const handleGenChar = (req, res, db,) => {
             returnedChar[7] = race;
             returnedChar[8] = gender;  
          });
-
-         resolve(returnedChar);
+         if(returnedChar[0] === true){
+            resolve(returnedChar);
+         } else {
+            reject ("Rejected");
+         }
+         
       })
       .then(function(result){
          return result
