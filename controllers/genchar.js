@@ -139,10 +139,7 @@ const handleGenChar = (req, res, db,) => {
       res.status(200).json(returnedChar)
    });
 
-   const sendAllCharData = new promise(function(resolve,reject){
-      
-   })
-   
+
 }
 
 module.exports = {
