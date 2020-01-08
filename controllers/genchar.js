@@ -116,11 +116,10 @@ const handleGenChar = (req, res, db,) => {
    function load() {
       return new Promise(resolve => {
          
-   
-         generateCharFirstName(db,race,gender, (data)=>{
-            returnedChar[0] = data[0].name;
-            
+         returnedChar[0] = generateCharFirstName(db,race,gender, (data)=>{
+            return data[0].name;
          });
+         
          generateCharImage(db,race,gender, (data)=>{
             returnedChar[1] = data[0].url;
          });
