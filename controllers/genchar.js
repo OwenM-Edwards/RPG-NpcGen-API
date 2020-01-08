@@ -46,7 +46,6 @@ const handleGenChar = (req, res, db,) => {
       returnedChar[0] = data[0].name;
    });
 
-
    generateCharImage = (db,race,gender,callback) =>{
       db('img'+race)
          .select('url')
@@ -137,8 +136,8 @@ const handleGenChar = (req, res, db,) => {
       returnedChar[8] = gender;  
       console.log(returnedChar)
       res.status(200).json(returnedChar)
+      returnedChar = [];
    });
-   console.log(returnedChar)
 
 }
 
