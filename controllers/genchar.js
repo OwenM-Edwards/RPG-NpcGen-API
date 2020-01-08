@@ -35,7 +35,7 @@ const handleGenChar = (req, res, db,) => {
       e:'descintrigue',
    })
       .select('a.name', 'b.url')
-      where('a.gender', true).orderByRaw('RANDOM() LIMIT 1')
+      .where('a.gender', true).orderByRaw('RANDOM() LIMIT 1')
    .then(data=>{
       res.status(200).json(data)
    })
