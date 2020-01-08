@@ -27,114 +27,145 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
 
-   let returnedChar = []
-
-   generateCharFirstName = (db,race,gender,callback) =>{
-      db('names'+race)
-         .select('name')
-         .where({gender:gender})
-         .orderByRaw('RANDOM() LIMIT 1')
-      .then(data =>{
-         callback(data)
-      })
-      .catch(error =>{
-         console.log(error)
-      })
-   }
-   returnedChar[0] = await generateCharFirstName(db,race,gender, (data)=>{
-      return data[0].name;
-   });
+   db({ a: 'nameshuman', b: 'imghuman'})
+      .select('a.name', 'b.url')
+      .orderByRaw('RANDOM() LIMIT 1')
+   .then(data=>{
+      res.status(200).json(data)
+   })
 
 
-   generateCharImage = (db,race,gender,callback) =>{
-      db('img'+race)
-         .select('url')
-         .where({gender:gender})
-         .where({moderation:true})
-         .orderByRaw('RANDOM() LIMIT 1')
-      .then(data=>{
-         callback(data)
-      })
-      .catch(error=>{
-         console.log(error)
-      })
-   }
-   generateCharImage(db,race,gender, (data)=>{
-      returnedChar[1] = data[0].url;
-   });
+
+//    generateCharFirstName = (db,race,gender,callback) =>{
+//       db('names'+race)
+//          .select('name')
+//          .where({gender:gender})
+//          .orderByRaw('RANDOM() LIMIT 1')
+//       .then(data =>{
+//          callback(data)
+//       })
+//       .catch(error =>{
+//          console.log(error)
+//       })
+//    }
 
 
-   generateCharAge = (db,race,callback) =>{
-      db('raceagemax')
-         .select('maxage')
-         .where('race', '=', race)
-      .then(data=>{
-         callback(data);
-      })
-      .catch(error=>{
-         console.log(error)
-      })
-   }
-   generateCharAge(db,race, (data)=>{
-      returnedChar[2] = data;
-   });
+//    generateCharImage = (db,race,gender,callback) =>{
+//       db('img'+race)
+//          .select('url')
+//          .where({gender:gender})
+//          .where({moderation:true})
+//          .orderByRaw('RANDOM() LIMIT 1')
+//       .then(data=>{
+//          callback(data)
+//       })
+//       .catch(error=>{
+//          console.log(error)
+//       })
+//    }
 
 
-   generateCharLastName = (db,race,callback) =>{
-      db('names'+race+'last')
-         .select('lastname')
-         .orderByRaw('RANDOM() LIMIT 1')
-      .then(data =>{
-         callback(data);
-      })
-      .catch(error=>{
-         console.log(error)
-      })
+
+//    generateCharAge = (db,race,callback) =>{
+//       db('raceagemax')
+//          .select('maxage')
+//          .where('race', '=', race)
+//       .then(data=>{
+//          callback(data);
+//       })
+//       .catch(error=>{
+//          console.log(error)
+//       })
+//    }
+
+
+
+//    generateCharLastName = (db,race,callback) =>{
+//       db('names'+race+'last')
+//          .select('lastname')
+//          .orderByRaw('RANDOM() LIMIT 1')
+//       .then(data =>{
+//          callback(data);
+//       })
+//       .catch(error=>{
+//          console.log(error)
+//       })
                   
-   }
-   generateCharLastName(db,race, (data)=>{
-      returnedChar[3] = data[0].lastname;
-   });
+//    }
 
 
-   generateCharIntrigue = (db,callback) =>{
-      db('descintrigue')
-         .select('intrigue')
-         .orderByRaw('RANDOM() LIMIT 1')
-      .then(data =>{
-         callback(data);
-      })
-      .catch(error=>{
-         console.log(error)
-      })
-   }
-   generateCharIntrigue(db, (data)=>{
-      returnedChar[4] = data[0].intrigue;
-   });
+
+//    generateCharIntrigue = (db,callback) =>{
+//       db('descintrigue')
+//          .select('intrigue')
+//          .orderByRaw('RANDOM() LIMIT 1')
+//       .then(data =>{
+//          callback(data);
+//       })
+//       .catch(error=>{
+//          console.log(error)
+//       })
+//    }
 
 
-   generateCharRoleplay = (db,callback) =>{
-      db('descroleplay')
-         .select('roleplay')
-         .orderByRaw('RANDOM() LIMIT 3')
-      .then(data =>{
-         callback(data);
-      })
-      .catch(error=>{
-         console.log(error)
-      })
-   }
-   generateCharRoleplay(db, (data)=>{
-      returnedChar[5] = data;
-      returnedChar[6] = role;
-      returnedChar[7] = race;
-      returnedChar[8] = gender;  
-      
-   });
-   res.status(200).json(returnedChar)
 
+//    generateCharRoleplay = (db,callback) =>{
+//       db('descroleplay')
+//          .select('roleplay')
+//          .orderByRaw('RANDOM() LIMIT 3')
+//       .then(data =>{
+//          callback(data);
+//       })
+//       .catch(error=>{
+//          console.log(error)
+//       })
+//    }
    
+//    function load() {
+//       return new Promise((resolve,reject) => {
+//          let returnedChar = [];
+//          returnedChar[1] = 2;
+
+//          generateCharFirstName(db,race,gender, (data)=>{
+//             returnedChar[0] = 'test';
+//          });
+         
+//          generateCharImage(db,race,gender, (data)=>{
+//             returnedChar[1] = data[0].url;
+//          });
+//          generateCharAge(db,race, (data)=>{ 
+//             returnedChar[2] = data;
+//          });
+//          generateCharLastName(db,race, (data)=>{
+//             returnedChar[3] = data[0].lastname;
+//          });
+//          generateCharIntrigue(db, (data)=>{
+//             returnedChar[4] = data[0].intrigue;
+//          });
+//          generateCharRoleplay(db, (data)=>{
+//             returnedChar[5] = data;
+//             returnedChar[6] = role;
+//             returnedChar[7] = race;
+//             returnedChar[8] = gender;  
+//          });
+//          if(returnedChar[0] === true){
+//             resolve(returnedChar);
+//          } else {
+//             reject ("Rejected");
+//          }
+         
+//       })
+//       .then(function(result){
+//          return result
+//       })
+//    }
    
+
+//    load().then(data => {
+//       console.log(data)
+//       res.status(200).json(data)
+//    })
+
 }
 
 module.exports = {
