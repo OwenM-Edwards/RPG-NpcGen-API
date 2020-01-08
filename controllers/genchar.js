@@ -25,21 +25,7 @@ const handleGenChar = (req, res, db,) => {
    }
 
    //GEN THE CHARACTER CHAIN
-   
 
-
-   generateCharFirstName = (db,race,gender,callback) =>{
-      db('names'+race)
-         .select('name')
-         .where({gender:gender})
-         .orderByRaw('RANDOM() LIMIT 1')
-      .then(data =>{
-         callback(data)
-      })
-      .catch(error =>{
-         console.log(error)
-      })
-   }
 
 
    generateCharImage = (db,race,gender,callback) =>{
@@ -117,6 +103,21 @@ const handleGenChar = (req, res, db,) => {
       return new Promise(resolve => {
          let returnedChar = [];
          returnedChar[1] = 2;
+            
+
+
+         generateCharFirstName = (db,race,gender,callback) =>{
+            db('names'+race)
+               .select('name')
+               .where({gender:gender})
+               .orderByRaw('RANDOM() LIMIT 1')
+            .then(data =>{
+               callback(data)
+            })
+            .catch(error =>{
+               console.log(error)
+            })
+         }
          generateCharFirstName(db,race,gender, (data)=>{
             returnedChar[0] = data[0].name;
          });
