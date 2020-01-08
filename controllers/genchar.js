@@ -29,46 +29,21 @@ const handleGenChar = (req, res, db,) => {
 
    db({ 
       a:'names'+race, 
-      b:'imghuman', 
+      b:'img'+race, 
       c:'raceagemax',
       d:'nameshumanlast',
       e:'descintrigue',
    })
       .select('a.name', 'b.url')
-      .where('a.gender', true).orderByRaw('RANDOM() LIMIT 1')
+      .where('b.gender', gender)
+      .where('b.moderation', true)
+      .orderByRaw('RANDOM() LIMIT 1')
+      .select('c.maxage')
+      .where('c.race', race)
    .then(data=>{
       res.status(200).json(data)
    })
 
-
-
-//    generateCharFirstName = (db,race,gender,callback) =>{
-//       db('names'+race)
-//          .select('name')
-//          .where({gender:gender})
-//          .orderByRaw('RANDOM() LIMIT 1')
-//       .then(data =>{
-//          callback(data)
-//       })
-//       .catch(error =>{
-//          console.log(error)
-//       })
-//    }
-
-
-//    generateCharImage = (db,race,gender,callback) =>{
-//       db('img'+race)
-//          .select('url')
-//          .where({gender:gender})
-//          .where({moderation:true})
-//          .orderByRaw('RANDOM() LIMIT 1')
-//       .then(data=>{
-//          callback(data)
-//       })
-//       .catch(error=>{
-//          console.log(error)
-//       })
-//    }
 
 
 
