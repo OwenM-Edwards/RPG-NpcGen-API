@@ -27,9 +27,15 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
 
-   db({ a: 'nameshuman', b: 'imghuman'})
+   db({ 
+      a:'nameshuman', 
+      b:'imghuman', 
+      c:'raceagemax',
+      d:'nameshumanlast',
+      e:'descintrigue',
+   })
       .select('a.name', 'b.url')
-      .orderByRaw('RANDOM() LIMIT 1')
+      where('a.gender', true).orderByRaw('RANDOM() LIMIT 1')
    .then(data=>{
       res.status(200).json(data)
    })
