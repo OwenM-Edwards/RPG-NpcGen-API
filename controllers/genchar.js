@@ -65,51 +65,6 @@ const handleGenChar = (req, res, db,) => {
             res.status(200).json(finalData)
          })
       })
-
-
-//    function load() {
-//       return new Promise((resolve,reject) => {
-//          let returnedChar = [];
-//          returnedChar[1] = 2;
-
-//          generateCharFirstName(db,race,gender, (data)=>{
-//             returnedChar[0] = 'test';
-//          });
-         
-//          generateCharImage(db,race,gender, (data)=>{
-//             returnedChar[1] = data[0].url;
-//          });
-//          generateCharAge(db,race, (data)=>{ 
-//             returnedChar[2] = data;
-//          });
-//          generateCharLastName(db,race, (data)=>{
-//             returnedChar[3] = data[0].lastname;
-//          });
-//          generateCharIntrigue(db, (data)=>{
-//             returnedChar[4] = data[0].intrigue;
-//          });
-//          generateCharRoleplay(db, (data)=>{
-//             returnedChar[5] = data;
-//             
-//          });
-//          if(returnedChar[0] === true){
-//             resolve(returnedChar);
-//          } else {
-//             reject ("Rejected");
-//          }
-         
-//       })
-//       .then(function(result){
-//          return result
-//       })
-//    }
-   
-
-//    load().then(data => {
-//       console.log(data)
-//       res.status(200).json(data)
-//    })
-
 }
 
 module.exports = {
