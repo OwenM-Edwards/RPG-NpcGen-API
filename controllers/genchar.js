@@ -28,7 +28,7 @@ const handleGenChar = (req, res, db,) => {
    
 
    db({ 
-      a:'nameshuman', 
+      a:'names'+race, 
       b:'imghuman', 
       c:'raceagemax',
       d:'nameshumanlast',
