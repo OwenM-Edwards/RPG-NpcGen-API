@@ -86,7 +86,6 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
          callback(data);
-         console.log(data);
       })
       .catch(error=>{
          console.log(error)
@@ -127,14 +126,14 @@ const handleGenChar = (req, res, db,) => {
    }
    generateCharRoleplay(db, (data)=>{
       returnedChar[5] = data;
-      console.log(returnedChar);
+      returnedChar[6] = role;
+      returnedChar[7] = race;
+      returnedChar[8] = gender;  
+      res.status(200).json(returnedChar)
    });
 
    
-   returnedChar[6] = role;
-   returnedChar[7] = race;
-   returnedChar[8] = gender;  
-   res.status(200).json(returnedChar)
+   
 }
 
 module.exports = {
