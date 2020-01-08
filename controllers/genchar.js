@@ -47,11 +47,12 @@ const handleGenChar = (req, res, db,) => {
       .select('d.lastname')
       //GET INTRIGUE
       .select('e.intrigue')
+      .then
       //GET THREE ROLEPLAY Q'S
       .select('f.roleplay')
       .select('f.roleplay')
       .select('f.roleplay')
-      .orderByRaw('RANDOM() LIMIT 1')
+      
    .then(data=>{
       res.status(200).json(data)
    })
