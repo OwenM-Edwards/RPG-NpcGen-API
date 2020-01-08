@@ -45,13 +45,11 @@ const handleGenChar = (req, res, db,) => {
       .where('c.race', race)
       //GET CHAR LAST NAME
       .select('d.lastname')
-
+      .orderByRaw('RANDOM() LIMIT 1')
       //GET INTRIGUE
       .select('e.intrigue')
-
       //GET THREE ROLEPLAY Q'S
       .select('f.roleplay')
-
    .then(data=>{
       res.status(200).json(data)
    })
