@@ -119,7 +119,7 @@ const handleGenChar = (req, res, db,) => {
    
          generateCharFirstName(db,race,gender, (data)=>{
             returnedChar[0] = data[0].name;
-            console.log(returnedChar[0]);
+            
          });
          generateCharImage(db,race,gender, (data)=>{
             returnedChar[1] = data[0].url;
@@ -139,7 +139,7 @@ const handleGenChar = (req, res, db,) => {
             returnedChar[7] = race;
             returnedChar[8] = gender;  
          });
-
+         console.log(returnedChar);
          resolve(returnedChar)
       })
    }
