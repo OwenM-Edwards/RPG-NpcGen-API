@@ -1,4 +1,4 @@
-const handleGenChar = (req, res, db,) => {
+const handleGenChar = (req, res, db) => {
    let randomGenderArr = [true,true];
    let randomRaceArr = ['human','human'];
    let randomRoleArr = ['merchant','wizard'];
@@ -99,7 +99,7 @@ const handleGenChar = (req, res, db,) => {
       })
    }
    
-   function load() {
+   function load(db) {
       return new Promise(resolve => {
          let returnedChar = [];
          returnedChar[1] = 2;
@@ -149,7 +149,7 @@ const handleGenChar = (req, res, db,) => {
    }
    
 
-   load().then(data => {
+   load(db).then(data => {
       console.log(data)
       res.status(200).json(data)
    })
