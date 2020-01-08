@@ -43,9 +43,6 @@ const handleGenChar = (req, res, db,) => {
       //GET CHAR RACE MAX AGE
       .select('c.maxage')
       .where('c.race', race)
-      //GET CHAR LAST NAME
-      .select('d.lastname')
-      .orderByRaw('RANDOM() LIMIT 1')
 
    .then(data=>{
       res.status(200).json(data)
