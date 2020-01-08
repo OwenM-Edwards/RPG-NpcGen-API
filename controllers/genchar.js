@@ -124,7 +124,7 @@ const handleGenChar = (req, res, db,) => {
          generateCharImage(db,race,gender, (data)=>{
             returnedChar[1] = data[0].url;
          });
-         generateCharAge(db,race, (data)=>{
+         generateCharAge(db,race, (data)=>{ 
             returnedChar[2] = data;
          });
          generateCharLastName(db,race, (data)=>{
