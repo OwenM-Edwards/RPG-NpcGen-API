@@ -27,7 +27,8 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
 
-   let returnedChar = []
+   let returnedChar = [];
+   returnedChar = [];
 
    generateCharFirstName = (db,race,gender,callback) =>{
       db('names'+race)
