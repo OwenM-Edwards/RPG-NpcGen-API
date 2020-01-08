@@ -146,11 +146,11 @@ const handleGenChar = (req, res, db,) => {
             returnedChar[8] = gender;  
          });
 
-         resolve(result)
+         resolve(returnedChar)
       })
    }
 
-   load().then(result => {
+   load().then(returnedChar => {
       res.status(200).json(returnedChar)
    })
 
