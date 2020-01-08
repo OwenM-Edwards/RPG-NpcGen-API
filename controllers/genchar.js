@@ -59,9 +59,9 @@ const handleGenChar = (req, res, db,) => {
             let finalData = []
             finalData[0] = charDataOne
             finalData[1] = data
-            finalData[0].role = role;
-            finalData[0].race = race;
-            finalData[0].gender = gender;  
+            finalData[2] = role;
+            finalData[3] = race;
+            finalData[4] = gender;  
             res.status(200).json(finalData)
          })
       })
