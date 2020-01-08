@@ -59,6 +59,9 @@ const handleGenChar = (req, res, db,) => {
             let finalData = []
             finalData[0] = charDataOne
             finalData[1] = data
+            returnedChar[0].role = role;
+            returnedChar[0].race = race;
+            returnedChar[0].gender = gender;  
             res.status(200).json(finalData)
          })
       })
@@ -87,9 +90,7 @@ const handleGenChar = (req, res, db,) => {
 //          });
 //          generateCharRoleplay(db, (data)=>{
 //             returnedChar[5] = data;
-//             returnedChar[6] = role;
-//             returnedChar[7] = race;
-//             returnedChar[8] = gender;  
+//             
 //          });
 //          if(returnedChar[0] === true){
 //             resolve(returnedChar);
