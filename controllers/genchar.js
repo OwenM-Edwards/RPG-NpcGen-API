@@ -112,10 +112,10 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   var returnedChar = [];
+
    function load() {
       return new Promise(resolve => {
-         
+         var returnedChar = [];
          returnedChar[0] = generateCharFirstName(db,race,gender, (data)=>{
             return data[0].name;
          });
