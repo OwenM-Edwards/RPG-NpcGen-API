@@ -47,15 +47,22 @@ const handleGenChar = (req, res, db,) => {
       .select('d.lastname')
       //GET INTRIGUE
       .select('e.intrigue')
-      .then
+      .orderByRaw('RANDOM() LIMIT 1')
       //GET THREE ROLEPLAY Q'S
-      .select('f.roleplay')
-      .select('f.roleplay')
-      .select('f.roleplay')
-      
-   .then(data=>{
-      res.status(200).json(data)
-   })
+      .then(data=>{
+         let charDataOne = data
+         db('descroleplay')
+         .select('roleplay')
+         .orderByRaw('RANDOM() LIMIT 3')
+
+         .then(data=>{
+            let finalData = []
+            finalData[0] = charDataOne
+            finalData[1] = data
+            res.status(200).json(finalData)
+         })
+      })
+
 
 //    function load() {
 //       return new Promise((resolve,reject) => {
