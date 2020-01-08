@@ -39,17 +39,19 @@ const handleGenChar = (req, res, db,) => {
       .select('a.name', 'b.url')
       .where('b.gender', gender)
       .where('b.moderation', true)
-      .orderByRaw('RANDOM() LIMIT 1')
+      
       //GET CHAR RACE MAX AGE
       .select('c.maxage')
       .where('c.race', race)
       //GET CHAR LAST NAME
       .select('d.lastname')
-      .orderByRaw('RANDOM() LIMIT 1')
       //GET INTRIGUE
       .select('e.intrigue')
       //GET THREE ROLEPLAY Q'S
       .select('f.roleplay')
+      .select('f.roleplay')
+      .select('f.roleplay')
+      .orderByRaw('RANDOM() LIMIT 1')
    .then(data=>{
       res.status(200).json(data)
    })
