@@ -36,6 +36,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
          callback(data)
+         console.log(data)
       })
       .catch(error =>{
          console.log(error)
@@ -54,6 +55,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data=>{
          callback(data)
+         console.log(data)
       })
       .catch(error=>{
          console.log(error)
@@ -70,6 +72,7 @@ const handleGenChar = (req, res, db,) => {
          .where('race', '=', race)
       .then(data=>{
          callback(data);
+         console.log(data)
       })
       .catch(error=>{
          console.log(error)
@@ -86,6 +89,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
          callback(data);
+         console.log(data)
       })
       .catch(error=>{
          console.log(error)
@@ -103,6 +107,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
          callback(data);
+         console.log(data)
       })
       .catch(error=>{
          console.log(error)
@@ -119,6 +124,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 3')
       .then(data =>{
          callback(data);
+         console.log(data)
       })
       .catch(error=>{
          console.log(error)
