@@ -144,8 +144,8 @@ const handleGenChar = (req, res, db,) => {
    }
    
 
-   load().then(returnedChar => {
-      console.log(returnedChar)
+   load().then(val => {
+      console.log(val)
       res.status(200).json(returnedChar)
    })
 
