@@ -80,6 +80,7 @@ const handleGenChar = (req, res, db,) => {
          .orderByRaw('RANDOM() LIMIT 1')
       .then(data =>{
          callback(data);
+         console.log(data);
       })
       .catch(error=>{
          console.log(error)
