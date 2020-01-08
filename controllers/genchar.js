@@ -3,19 +3,25 @@ const handleGenChar = (req, res, db,) => {
    let randomRaceArr = ['human','human'];
    let randomRoleArr = ['merchant','wizard'];
    if(req.body.gender === 'random'){
-      var gender = randomGenderArr[Math.floor(Math.random()*randomGenderArr.length)];
+      var gender = true
+      // randomGenderArr[Math.floor(Math.random()*randomGenderArr.length)];
    } else {
-      var gender = req.body.gender;
+      var gender = true
+      // req.body.gender;
    }
    if(req.body.race === 'random'){
-      var race = randomRaceArr[Math.floor(Math.random()*randomRaceArr.length)];
+      var race = 'human'
+      // randomRaceArr[Math.floor(Math.random()*randomRaceArr.length)];
    }  else {
-      var race = req.body.race;
+      var race = 'human'
+      // req.body.race;
    }
    if(req.body.role === 'random'){
-      var role = randomRoleArr[Math.floor(Math.random()*randomRoleArr.length)];
+      var role = 'merchant'
+      // randomRoleArr[Math.floor(Math.random()*randomRoleArr.length)];
    } else {
-      var role = req.body.role;
+      var role = 'merchant'
+      // req.body.role;
    }
 
    //GEN THE CHARACTER CHAIN
