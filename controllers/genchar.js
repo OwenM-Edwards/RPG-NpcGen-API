@@ -112,7 +112,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   let returnedChar = [];
+   var returnedChar = [];
    function load() {
       return new Promise(resolve => {
          
@@ -140,9 +140,10 @@ const handleGenChar = (req, res, db,) => {
             returnedChar[8] = gender;  
          });
 
-         resolve(returnedChar)
-      })
+         resolve(returnedChar);
+      });
    }
+   
 
    load().then(returnedChar => {
       console.log(returnedChar)
