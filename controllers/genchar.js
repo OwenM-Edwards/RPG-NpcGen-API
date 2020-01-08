@@ -27,8 +27,6 @@ const handleGenChar = (req, res, db,) => {
    //GEN THE CHARACTER CHAIN
    
 
-   let returnedChar = [];
-   returnedChar = [];
 
    generateCharFirstName = (db,race,gender,callback) =>{
       db('names'+race)
@@ -43,9 +41,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharFirstName(db,race,gender, (data)=>{
-      returnedChar[0] = data[0].name;
-   });
+
 
    generateCharImage = (db,race,gender,callback) =>{
       db('img'+race)
@@ -61,9 +57,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharImage(db,race,gender, (data)=>{
-      returnedChar[1] = data[0].url;
-   });
+
 
 
    generateCharAge = (db,race,callback) =>{
@@ -78,9 +72,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharAge(db,race, (data)=>{
-      returnedChar[2] = data;
-   });
+
 
 
    generateCharLastName = (db,race,callback) =>{
@@ -96,9 +88,7 @@ const handleGenChar = (req, res, db,) => {
       })
                   
    }
-   generateCharLastName(db,race, (data)=>{
-      returnedChar[3] = data[0].lastname;
-   });
+
 
 
    generateCharIntrigue = (db,callback) =>{
@@ -113,9 +103,7 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharIntrigue(db, (data)=>{
-      returnedChar[4] = data[0].intrigue;
-   });
+
 
 
    generateCharRoleplay = (db,callback) =>{
@@ -130,15 +118,41 @@ const handleGenChar = (req, res, db,) => {
          console.log(error)
       })
    }
-   generateCharRoleplay(db, (data)=>{
-      returnedChar[5] = data;
-      returnedChar[6] = role;
-      returnedChar[7] = race;
-      returnedChar[8] = gender;  
-      console.log(returnedChar)
+
+   function load() {
+      return new Promise(resolve => {
+         let returnedChar = [];
+         returnedChar = [];
+   
+         generateCharFirstName(db,race,gender, (data)=>{
+            returnedChar[0] = data[0].name;
+         });
+         generateCharImage(db,race,gender, (data)=>{
+            returnedChar[1] = data[0].url;
+         });
+         generateCharAge(db,race, (data)=>{
+            returnedChar[2] = data;
+         });
+         generateCharLastName(db,race, (data)=>{
+            returnedChar[3] = data[0].lastname;
+         });
+         generateCharIntrigue(db, (data)=>{
+            returnedChar[4] = data[0].intrigue;
+         });
+         generateCharRoleplay(db, (data)=>{
+            returnedChar[5] = data;
+            returnedChar[6] = role;
+            returnedChar[7] = race;
+            returnedChar[8] = gender;  
+         });
+
+         resolve(result)
+      })
+   }
+
+   load().then(result => {
       res.status(200).json(returnedChar)
-      returnedChar = [];
-   });
+   })
 
 }
 
