@@ -31,77 +31,31 @@ const handleGenChar = (req, res, db,) => {
       a:'names'+race, 
       b:'img'+race, 
       c:'raceagemax',
-      d:'nameshumanlast',
+      d:'names'+race+'last',
       e:'descintrigue',
+      f:'descroleplay'
    })
+      //SELECT NAME AND IMAGE
       .select('a.name', 'b.url')
       .where('b.gender', gender)
       .where('b.moderation', true)
       .orderByRaw('RANDOM() LIMIT 1')
+      //GET CHAR RACE MAX AGE
       .select('c.maxage')
       .where('c.race', race)
+      //GET CHAR LAST NAME
+      .select('d.lastname')
+      .orderByRaw('RANDOM() LIMIT 1')
+      //GET INTRIGUE
+      .select('d.intrigue')
+      .orderByRaw('RANDOM() LIMIT 1')
+      //GET THREE ROLEPLAY Q'S
+      .select('f.roleplay')
+      .orderByRaw('RANDOM() LIMIT 3')
    .then(data=>{
       res.status(200).json(data)
    })
 
-
-
-
-//    generateCharAge = (db,race,callback) =>{
-//       db('raceagemax')
-//          .select('maxage')
-//          .where('race', '=', race)
-//       .then(data=>{
-//          callback(data);
-//       })
-//       .catch(error=>{
-//          console.log(error)
-//       })
-//    }
-
-
-
-//    generateCharLastName = (db,race,callback) =>{
-//       db('names'+race+'last')
-//          .select('lastname')
-//          .orderByRaw('RANDOM() LIMIT 1')
-//       .then(data =>{
-//          callback(data);
-//       })
-//       .catch(error=>{
-//          console.log(error)
-//       })
-                  
-//    }
-
-
-
-//    generateCharIntrigue = (db,callback) =>{
-//       db('descintrigue')
-//          .select('intrigue')
-//          .orderByRaw('RANDOM() LIMIT 1')
-//       .then(data =>{
-//          callback(data);
-//       })
-//       .catch(error=>{
-//          console.log(error)
-//       })
-//    }
-
-
-
-//    generateCharRoleplay = (db,callback) =>{
-//       db('descroleplay')
-//          .select('roleplay')
-//          .orderByRaw('RANDOM() LIMIT 3')
-//       .then(data =>{
-//          callback(data);
-//       })
-//       .catch(error=>{
-//          console.log(error)
-//       })
-//    }
-   
 //    function load() {
 //       return new Promise((resolve,reject) => {
 //          let returnedChar = [];
