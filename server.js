@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex')
 const cloudinary = require('cloudinary').v2;
+const bcrypt = require('bcrypt-nodejs');
 
 const charimage = require('./controllers/imageUpload');
 const addname = require('./controllers/addname');
@@ -10,6 +11,9 @@ const genchar = require('./controllers/genchar');
 const addroleplay = require('./controllers/addRoleplay');
 const addintrigue = require('./controllers/addIntrigue');
 const cloudnote = require('./controllers/cloudnote');
+const register = require('./controllers/register');
+const signin = require('./controllers/signin');
+const profile = require('./controllers/profile');
 const app =  express();
 
 cloudinary.config({ 
@@ -41,19 +45,12 @@ app.post('/genchar', (req, res)=>{ genchar.handleGenChar(req,res,db)});
 
 //REPLY FROM CLOUDINARY MODERATION
 app.post('/cloudnotification', (req, res)=>{ cloudnote.handleCloudNote(req,res,db)});
-//    if(req.body.moderation_status === 'approved') {
-//       db('testing') 
-//       .insert({height: req.body.version})
-//       .then(data=> {
-//          res.status(200).json({ success: true})
-//       }) 
-//       .catch(error=>{
-//          res.status(800).json('duplicate last name')
-//       })
-//    } else {
-//       console.log('no');
-//    }
-// });
+
+
+app.post('/signin', signin.handleSignIn(db, bcrypt) );
+app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) } );
+app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req,res,db)});
+
 
 app.listen(process.env.PORT || 3000, ()=> {
    console.log("App running on port ${process.env.PORT}")
